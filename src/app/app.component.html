@@ -1,0 +1,27 @@
+<div class="escenario">
+  <div class="luces"></div>
+  <div class="tinte" [ngClass]="modoClase"></div>
+
+  <h1>TROIA</h1>
+
+  <div class="circulo-wrap">
+    <canvas #wave class="onda" [class.oculta]="!hablando" width="380" height="380"></canvas>
+    <div #circle class="circulo" [class.hablando]="hablando">
+      <img src="assets/img.png" alt="TROIA" />
+    </div>
+  </div>
+
+  <p class="subtitulo" *ngIf="lineaActual">{{ lineaActual.texto }}</p>
+
+  <audio #audioEl></audio>
+
+  <div class="lineas">
+    <button
+      *ngFor="let linea of lineas"
+      (click)="reproducir(linea)"
+      [class.activo]="lineaActual?.id === linea.id && hablando"
+    >
+      Línea {{ linea.id }}
+    </button>
+  </div>
+</div>
