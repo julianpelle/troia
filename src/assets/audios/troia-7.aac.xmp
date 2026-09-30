@@ -1,5 +1,5 @@
 <?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
-<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 10.0-c000 26.GD02.7bdc8c5, 2026/02/11-15:24:47        " rdfhash="0E2090FAB72A76BE40F79F6DA5841F9F" merged="0">
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 10.0-c000 26.GD02.7bdc8c5, 2026/02/11-15:24:47        " rdfhash="015A0450BA4CCADA55D1AEB9D31FA96B" merged="0">
  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <rdf:Description rdf:about=""
     xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
@@ -10,13 +10,13 @@
     xmlns:tiff="http://ns.adobe.com/tiff/1.0/"
     xmlns:creatorAtom="http://ns.adobe.com/creatorAtom/1.0/"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmpMM:InstanceID="xmp.iid:6c58503d-1a09-374f-ab58-60116427aec5"
-   xmpMM:DocumentID="5e80589b-8224-f99f-5cbc-d57c00000041"
-   xmpMM:OriginalDocumentID="xmp.did:0c3402ad-6479-b94c-88d6-1d175ef01357"
-   xmp:MetadataDate="2026-09-30T14:17:44-03:00"
-   xmp:ModifyDate="2026-09-30T14:17:44-03:00"
+   xmpMM:InstanceID="xmp.iid:d0b6513c-a99f-5445-9681-ef47a527a40b"
+   xmpMM:DocumentID="5cbb3dee-bd17-7934-0d12-4c0e00000041"
+   xmpMM:OriginalDocumentID="xmp.did:30d6fdfd-6a7b-4644-beeb-eaa2ae24b063"
+   xmp:MetadataDate="2026-09-30T14:18:42-03:00"
+   xmp:ModifyDate="2026-09-30T14:18:42-03:00"
    xmp:CreatorTool="Adobe Premiere Pro 2026.0 (Windows)"
-   xmp:CreateDate="2026-09-30T14:17:14-03:00"
+   xmp:CreateDate="2026-09-30T14:18:11-03:00"
    xmpDM:audioSampleRate="48000"
    xmpDM:audioSampleType="16Int"
    xmpDM:audioChannelType="Stereo"
@@ -27,25 +27,25 @@
     <rdf:Seq>
      <rdf:li
       stEvt:action="saved"
-      stEvt:instanceID="8f28b136-75b2-56e2-ab1c-2a870000006e"
-      stEvt:when="2026-09-30T14:17:44-03:00"
+      stEvt:instanceID="2d29cfa1-afe2-1df5-a849-130f0000006e"
+      stEvt:when="2026-09-30T14:18:42-03:00"
       stEvt:softwareAgent="Adobe Premiere Pro 2026.0 (Windows)"
       stEvt:changed="/"/>
      <rdf:li
       stEvt:action="created"
-      stEvt:instanceID="xmp.iid:fc0cefb9-27ec-b54c-832b-17a9daa6dd07"
-      stEvt:when="2026-09-30T14:17:43-03:00"
+      stEvt:instanceID="xmp.iid:638a20fa-40b3-9d48-aca0-d17226f36551"
+      stEvt:when="2026-09-30T14:18:41-03:00"
       stEvt:softwareAgent="Adobe Premiere Pro 2026.0 (Windows)"/>
      <rdf:li
       stEvt:action="saved"
-      stEvt:instanceID="xmp.iid:aba4eea6-0394-4e4a-99ee-c5b0e1d07867"
-      stEvt:when="2026-09-30T14:17:44-03:00"
+      stEvt:instanceID="xmp.iid:0802ecec-5323-c34c-b1a7-04cd1c7b4d02"
+      stEvt:when="2026-09-30T14:18:42-03:00"
       stEvt:softwareAgent="Adobe Premiere Pro 2026.0 (Windows)"
       stEvt:changed="/"/>
      <rdf:li
       stEvt:action="saved"
-      stEvt:instanceID="xmp.iid:6c58503d-1a09-374f-ab58-60116427aec5"
-      stEvt:when="2026-09-30T14:17:44-03:00"
+      stEvt:instanceID="xmp.iid:d0b6513c-a99f-5445-9681-ef47a527a40b"
+      stEvt:when="2026-09-30T14:18:42-03:00"
       stEvt:softwareAgent="Adobe Premiere Pro 2026.0 (Windows)"
       stEvt:changed="/metadata"/>
     </rdf:Seq>
@@ -53,18 +53,18 @@
    <xmpMM:Ingredients>
     <rdf:Bag>
      <rdf:li
-      stRef:instanceID="309a8326-5f81-1f40-127f-b66500000086"
-      stRef:documentID="dce9c61d-d1b1-4b37-8036-d5ac00000059"
-      stRef:fromPart="time:23918146560000f254016000000d1859397120000f254016000000"
-      stRef:toPart="time:8545098240000f254016000000d1859397120000f254016000000"
-      stRef:filePath="2026-09-30 14-12-29.mp4"
+      stRef:instanceID="d01548bf-2898-529b-d74c-3e6600000086"
+      stRef:documentID="28c51ad1-2dea-3ccf-75e6-53f500000059"
+      stRef:fromPart="time:2997388800000f254016000000d1879718400000f254016000000"
+      stRef:toPart="time:12568711680000f254016000000d1879718400000f254016000000"
+      stRef:filePath="2026-09-30 14-14-21.mp4"
       stRef:maskMarkers="None"/>
      <rdf:li
-      stRef:instanceID="309a8326-5f81-1f40-127f-b66500000086"
-      stRef:documentID="dce9c61d-d1b1-4b37-8036-d5ac00000059"
-      stRef:fromPart="time:23918146560000f254016000000d1859397120000f254016000000"
-      stRef:toPart="time:8545098240000f254016000000d1859397120000f254016000000"
-      stRef:filePath="2026-09-30 14-12-29.mp4"
+      stRef:instanceID="d01548bf-2898-529b-d74c-3e6600000086"
+      stRef:documentID="28c51ad1-2dea-3ccf-75e6-53f500000059"
+      stRef:fromPart="time:2997388800000f254016000000d1879718400000f254016000000"
+      stRef:toPart="time:12568711680000f254016000000d1879718400000f254016000000"
+      stRef:filePath="2026-09-30 14-14-21.mp4"
       stRef:maskMarkers="None"/>
     </rdf:Bag>
    </xmpMM:Ingredients>
@@ -73,21 +73,21 @@
      <rdf:li>
       <rdf:Description
        xmp:CreateDate="1904-01-01T00:00:00Z"
-       xmp:ModifyDate="2026-09-30T14:15:19-03:00"
-       xmp:MetadataDate="2026-09-30T14:15:19-03:00"
+       xmp:ModifyDate="2026-09-30T14:15:20-03:00"
+       xmp:MetadataDate="2026-09-30T14:15:20-03:00"
        tiff:Orientation="1"
-       xmpMM:InstanceID="309a8326-5f81-1f40-127f-b66500000086"
-       xmpMM:DocumentID="dce9c61d-d1b1-4b37-8036-d5ac00000059"
-       xmpMM:OriginalDocumentID="xmp.did:894e2758-0d08-0b45-baa7-1408eab71a6f">
+       xmpMM:InstanceID="d01548bf-2898-529b-d74c-3e6600000086"
+       xmpMM:DocumentID="28c51ad1-2dea-3ccf-75e6-53f500000059"
+       xmpMM:OriginalDocumentID="xmp.did:cf6d5d01-0c12-564f-962b-8635ef20a6cf">
       <xmpDM:duration
-       xmpDM:value="110117"
+       xmpDM:value="23584"
        xmpDM:scale="1/1000"/>
       <xmpMM:History>
        <rdf:Seq>
         <rdf:li
          stEvt:action="saved"
-         stEvt:instanceID="309a8326-5f81-1f40-127f-b66500000086"
-         stEvt:when="2026-09-30T14:15:19-03:00"
+         stEvt:instanceID="d01548bf-2898-529b-d74c-3e6600000086"
+         stEvt:when="2026-09-30T14:15:20-03:00"
          stEvt:softwareAgent="Adobe Premiere Pro 2026.0 (Windows)"
          stEvt:changed="/"/>
        </rdf:Seq>
@@ -97,9 +97,9 @@
     </rdf:Bag>
    </xmpMM:Pantry>
    <xmpMM:DerivedFrom
-    stRef:instanceID="xmp.iid:fc0cefb9-27ec-b54c-832b-17a9daa6dd07"
-    stRef:documentID="xmp.did:fc0cefb9-27ec-b54c-832b-17a9daa6dd07"
-    stRef:originalDocumentID="xmp.did:fc0cefb9-27ec-b54c-832b-17a9daa6dd07"/>
+    stRef:instanceID="xmp.iid:638a20fa-40b3-9d48-aca0-d17226f36551"
+    stRef:documentID="xmp.did:638a20fa-40b3-9d48-aca0-d17226f36551"
+    stRef:originalDocumentID="xmp.did:638a20fa-40b3-9d48-aca0-d17226f36551"/>
    <creatorAtom:windowsAtom
     creatorAtom:extension=".prproj"
     creatorAtom:invocationFlags="/L"
@@ -110,13 +110,13 @@
    <xmpDM:projectRef
     xmpDM:type="movie"/>
    <xmpDM:duration
-    xmpDM:value="351360"
+    xmpDM:value="355200"
     xmpDM:scale="1/48000"/>
    <xmpDM:startTimecode
     xmpDM:timeFormat="25Timecode"
-    xmpDM:timeValue="00:00:33:16"/>
+    xmpDM:timeValue="00:00:49:12"/>
    <xmpDM:altTimecode
-    xmpDM:timeValue="00:00:33:16"
+    xmpDM:timeValue="00:00:49:12"
     xmpDM:timeFormat="25Timecode"/>
   </rdf:Description>
  </rdf:RDF>
