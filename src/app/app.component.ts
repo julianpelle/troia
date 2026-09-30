@@ -72,7 +72,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   private idleTimer: ReturnType<typeof setTimeout> | null = null;
   private alertaTimer: ReturnType<typeof setTimeout> | null = null;
-  private readonly TIEMPO_INACTIVIDAD_MS = 5 * 60 * 1000; // 5 minutos
+  // Tiempo sin actividad antes de la alerta roja. Para la demo real: 5 * 60 * 1000
+  private readonly TIEMPO_INACTIVIDAD_MS = 20 * 1000; // 20 segundos (modo prueba)
+  private ultimoX = -1;
+  private ultimoY = -1;
 
   get modoClase(): string {
     if (this.fase === 'alerta') return 'modo-rojo';
@@ -82,10 +85,19 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     return 'idle';
   }
 
-  @HostListener('window:mousemove')
   @HostListener('window:mousedown')
   @HostListener('window:touchstart')
   actividadDetectada(): void {
+    this.reiniciarTemporizadorInactividad();
+  }
+
+  // Ignora el "ruido" del mouse (micro-vibraciones): solo cuenta si se movió de verdad
+  @HostListener('window:mousemove', ['$event'])
+  movimientoMouse(ev: MouseEvent): void {
+    const movio = Math.hypot(ev.clientX - this.ultimoX, ev.clientY - this.ultimoY) > 8;
+    if (!movio) return;
+    this.ultimoX = ev.clientX;
+    this.ultimoY = ev.clientY;
     this.reiniciarTemporizadorInactividad();
   }
 

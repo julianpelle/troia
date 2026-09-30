@@ -21,7 +21,7 @@ Abrí http://localhost:4200
 3. Con los 4 elementos cargados, **Enter** arranca la barra de progreso.
 4. Al completarse, se abre una caja grande de "Procesando…" (~7-8 segundos) generando la imagen sin perder la esencia de Martín.
 5. La caja se cierra sola y queda esperando un segundo **Enter** para revelar el aviso de que TROIA ya envió el archivo por mail (transición suave).
-6. **Si pasan 5 minutos sin mover el mouse, tocar teclas ni hacer click** mientras espera ese Enter, salta automáticamente una alerta a pantalla completa en rojo: "ALERTA MARTÍN SON" / "23:50hs", con `troia-7.aac` sonando y una barra que se completa en ~4.5 segundos. Al terminar, la ventana se cierra sola y pasa directo al aviso de envío (TROIA lo mandó igual, sin esperar a Martín).
+6. **Si pasan 20 segundos (modo prueba; cambiá `TIEMPO_INACTIVIDAD_MS` en `app.component.ts` a `5 * 60 * 1000` para 5 minutos) sin mover el mouse, tocar teclas ni hacer click** mientras espera ese Enter, salta automáticamente una alerta a pantalla completa en rojo: "ALERTA MARTÍN SON" / "23:50hs", con `troia-7.aac` sonando y una barra que se completa en ~4.5 segundos. Al terminar, la ventana se cierra sola y pasa directo al aviso de envío (TROIA lo mandó igual, sin esperar a Martín).
 7. Un **Enter** más (sin ningún aviso en pantalla) dispara el festejo final: "FELICITACIONES MARTÍN, LO HICIMOS", confetti y `troia-6.aac`.
 
 ## Cómo funciona
