@@ -73,7 +73,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private idleTimer: ReturnType<typeof setTimeout> | null = null;
   private alertaTimer: ReturnType<typeof setTimeout> | null = null;
   // Tiempo sin actividad antes de la alerta roja. Para la demo real: 5 * 60 * 1000
-  private readonly TIEMPO_INACTIVIDAD_MS = 20 * 1000; // 20 segundos (modo prueba)
+  private readonly TIEMPO_INACTIVIDAD_MS = 10 * 1000; // 10 segundos (modo prueba)
   private ultimoX = -1;
   private ultimoY = -1;
 
