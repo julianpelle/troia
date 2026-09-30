@@ -14,12 +14,17 @@
     <div #circle class="circulo" [class.hablando]="hablando">
       <img src="assets/img.png" alt="TROIA" />
     </div>
-    <div class="resultado" *ngIf="fase === 'enviado' || fase === 'celebrando'">
+    <div class="resultado" [class.saliendo]="saliendoEnviado" *ngIf="fase === 'enviado' || fase === 'celebrando'">
       <span class="tic">✓</span>
     </div>
   </div>
 
   <audio #audioEl></audio>
+
+  <div class="mail-enviado" [class.saliendo]="saliendoEnviado" *ngIf="fase === 'enviado'">
+    <span class="sobre">📧</span>
+    <p class="mail-texto">Mail enviado</p>
+  </div>
 
   <div class="zona-drop" [class.activa]="arrastrando" *ngIf="fase === 'carga'">
     <p class="pista" *ngIf="elementosCargados.length === 0 && !cargando">
@@ -42,7 +47,7 @@
     <div class="barra"><div class="relleno" [style.width.%]="progreso"></div></div>
   </div>
 
-  <p class="mensaje-final" *ngIf="fase === 'enviado'">
+  <p class="mensaje-final" [class.saliendo]="saliendoEnviado" *ngIf="fase === 'enviado'">
     TROIA ya envió el archivo por mail — Martín no lo había hecho y no llegaba con el deadline.
   </p>
 
@@ -57,6 +62,14 @@
       Generando la imagen final a partir de tus diseños, preservando intacta
       la esencia humana de Martín y replicando sus rasgos con precisión.
     </p>
+  </div>
+
+  <div class="caja-alerta" *ngIf="fase === 'alerta'">
+    <p class="alerta-titulo">ALERTA MARTÍN SON</p>
+    <p class="alerta-hora">23:50hs</p>
+    <div class="barra barra-alerta">
+      <div class="relleno relleno-alerta" [style.width.%]="progresoAlerta"></div>
+    </div>
   </div>
 
   <div class="confeti-cont" *ngIf="fase === 'celebrando'">

@@ -20,7 +20,7 @@ interface ConfetiPieza {
   duracion: number;
 }
 
-type Fase = 'carga' | 'procesando' | 'generando' | 'pendiente' | 'enviado' | 'celebrando';
+type Fase = 'carga' | 'procesando' | 'generando' | 'pendiente' | 'alerta' | 'enviado' | 'celebrando';
 
 @Component({
   selector: 'app-root',
@@ -66,17 +66,33 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   // --- secuencia de procesamiento / cierre ---
   fase: Fase = 'carga';
   progreso = 0;
+  progresoAlerta = 0;
+  saliendoEnviado = false;
   confetiPiezas: ConfetiPieza[] = [];
 
+  private idleTimer: ReturnType<typeof setTimeout> | null = null;
+  private alertaTimer: ReturnType<typeof setTimeout> | null = null;
+  private readonly TIEMPO_INACTIVIDAD_MS = 5 * 60 * 1000; // 5 minutos
+
   get modoClase(): string {
+    if (this.fase === 'alerta') return 'modo-rojo';
     if (this.fase === 'procesando' || this.fase === 'generando' || this.fase === 'pendiente') return 'modo-azul';
     if (this.fase === 'enviado' || this.fase === 'celebrando') return 'modo-verde';
     if (this.hablando && this.lineaActual) return this.lineaActual.final ? 'modo-verde' : 'modo-azul';
     return 'idle';
   }
 
+  @HostListener('window:mousemove')
+  @HostListener('window:mousedown')
+  @HostListener('window:touchstart')
+  actividadDetectada(): void {
+    this.reiniciarTemporizadorInactividad();
+  }
+
   @HostListener('window:keydown', ['$event'])
   manejarTecla(ev: KeyboardEvent): void {
+    this.reiniciarTemporizadorInactividad();
+
     if (ev.key >= '1' && ev.key <= '4') {
       const idx = Number(ev.key) - 1;
       if (this.lineas[idx]) this.reproducir(this.lineas[idx]);
@@ -87,10 +103,39 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     if (this.fase === 'carga' && this.elementosCargados.length === this.secuenciaCarga.length) {
       this.iniciarProcesamiento();
     } else if (this.fase === 'pendiente') {
+      if (this.idleTimer) clearTimeout(this.idleTimer);
       this.fase = 'enviado';
     } else if (this.fase === 'enviado') {
-      this.iniciarCelebracion();
+      this.saliendoEnviado = true;
+      setTimeout(() => {
+        this.saliendoEnviado = false;
+        this.iniciarCelebracion();
+      }, 500);
     }
+  }
+
+  private reiniciarTemporizadorInactividad(): void {
+    if (this.fase !== 'pendiente') return;
+    if (this.idleTimer) clearTimeout(this.idleTimer);
+    this.idleTimer = setTimeout(() => this.dispararAlertaRoja(), this.TIEMPO_INACTIVIDAD_MS);
+  }
+
+  private dispararAlertaRoja(): void {
+    if (this.fase !== 'pendiente') return;
+    this.fase = 'alerta';
+    this.progresoAlerta = 0;
+    new Audio('assets/audios/troia-7.aac').play().catch((err) => console.error(err));
+
+    // barra rápida pero legible: se completa en ~4.5s y ahí se cierra la ventana sola
+    const paso = () => {
+      this.progresoAlerta = Math.min(100, this.progresoAlerta + 2.2);
+      if (this.progresoAlerta >= 100) {
+        this.fase = 'enviado'; // TROIA lo envía automáticamente
+        return;
+      }
+      this.alertaTimer = setTimeout(paso, 100);
+    };
+    paso();
   }
 
   // --- drag & drop ---
@@ -132,6 +177,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.fase = 'generando';
         setTimeout(() => {
           this.fase = 'pendiente';
+          this.reiniciarTemporizadorInactividad();
         }, 6500 + Math.random() * 2000);
         return;
       }
@@ -310,5 +356,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     cancelAnimationFrame(this.rafId);
     this.audioCtx?.close();
+    if (this.idleTimer) clearTimeout(this.idleTimer);
+    if (this.alertaTimer) clearTimeout(this.alertaTimer);
   }
 }

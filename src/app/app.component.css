@@ -206,6 +206,7 @@ h1 {
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .tic {
@@ -220,6 +221,40 @@ h1 {
   to   { transform: scale(1); opacity: 1; }
 }
 
+/* animación de "mail enviado" al terminar la barra de la alerta */
+.mail-enviado {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  animation: enviarMail 0.6s cubic-bezier(.22, 1, .36, 1);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+@keyframes enviarMail {
+  0%   { transform: translateY(26px) scale(0.8) rotate(-6deg); opacity: 0; }
+  60%  { transform: translateY(-4px) scale(1.06) rotate(2deg); opacity: 1; }
+  100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+}
+
+.sobre {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 0 14px rgba(127, 200, 255, 0.5));
+}
+
+.mail-texto {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: #bcd9c8;
+}
+
+/* se aplica a .resultado, .mail-enviado y .mensaje-final al tocar Enter para pasar al festejo */
+.saliendo {
+  opacity: 0 !important;
+  transform: translateY(-14px) !important;
+}
+
 .mensaje-final {
   position: relative;
   max-width: 480px;
@@ -229,6 +264,7 @@ h1 {
   letter-spacing: 0.02em;
   line-height: 1.5;
   animation: aparecer 0.9s cubic-bezier(.22, 1, .36, 1);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .celebracion {
@@ -282,7 +318,62 @@ h1 {
   border-top-color: #7fc8ff;
 }
 
-/* confetti */
+/* alerta roja por inactividad */
+.caja-alerta {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(160deg, #4a0000 0%, #7a0505 45%, #260000 100%);
+  animation: aparecerAlerta 0.35s ease;
+}
+
+@keyframes aparecerAlerta {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.alerta-titulo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #ffdcdc;
+  text-shadow: 0 0 18px rgba(255, 80, 80, 0.7);
+  animation: parpadeo 1s ease-in-out infinite;
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+.alerta-hora {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-shadow: 0 0 28px rgba(255, 60, 60, 0.9);
+}
+
+.barra-alerta {
+  width: 280px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.relleno-alerta {
+  height: 100%;
+  background: linear-gradient(90deg, #ff5050, #ffffff);
+  transition: width 0.12s linear;
+}
 .confeti-cont {
   position: fixed;
   inset: 0;
