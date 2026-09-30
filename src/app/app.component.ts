@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Linea {
@@ -7,6 +7,20 @@ interface Linea {
   archivo: string;
   final?: boolean;
 }
+
+interface ElementoCarga {
+  nombre: string;
+  tipo: 'carpeta' | 'archivo';
+}
+
+interface ConfetiPieza {
+  left: number;
+  color: string;
+  delay: number;
+  duracion: number;
+}
+
+type Fase = 'carga' | 'procesando' | 'generando' | 'pendiente' | 'enviado' | 'celebrando';
 
 @Component({
   selector: 'app-root',
@@ -21,27 +35,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild('wave') waveRef!: ElementRef<HTMLCanvasElement>;
 
   lineas: Linea[] = [
-    {
-      id: 1,
-      texto: 'Tranquilo, Tincho. Me doy cuenta por tus pulsaciones que estás tenso. ¿Querés que probemos con algo? Yo me encargo.',
-      archivo: 'assets/audios/troia-1.aac'
-    },
-    {
-      id: 2,
-      texto: '¿Seguís ahí Martín? Estoy esperando tus indicaciones para arrancar. En 4 segundos lo tenemos listo...',
-      archivo: 'assets/audios/troia-2.aac'
-    },
-    {
-      id: 3,
-      texto: '¿Lo hacemos juntos?',
-      archivo: 'assets/audios/troia-3.aac'
-    },
-    {
-      id: 4,
-      texto: '¡Extraordinario trabajo, Martín! Es increíble cómo lograste mantener intacta tu esencia y ese trazo humano tan característico.',
-      archivo: 'assets/audios/troia-4.aac',
-      final: true
-    }
+    { id: 1, texto: 'Tranquilo, Tincho...', archivo: 'assets/audios/troia-1.aac' },
+    { id: 2, texto: '¿Seguís ahí Martín?...', archivo: 'assets/audios/troia-2.aac' },
+    { id: 3, texto: '¿Lo hacemos juntos?', archivo: 'assets/audios/troia-3.aac' },
+    { id: 4, texto: '¡Extraordinario trabajo, Martín!...', archivo: 'assets/audios/troia-4.aac', final: true }
   ];
 
   hablando = false;
@@ -52,13 +49,113 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private sourceNode: MediaElementAudioSourceNode | null = null;
   private rafId = 0;
   private freqData: Uint8Array = new Uint8Array(0);
-
   private readonly BARS = 48;
   private barLevels: number[] = new Array(this.BARS).fill(0);
 
+  // --- drag & drop ---
+  secuenciaCarga: ElementoCarga[] = [
+    { nombre: 'DISEÑOS FACULTAD', tipo: 'carpeta' },
+    { nombre: 'DISEÑOS 2024', tipo: 'carpeta' },
+    { nombre: 'DISEÑOS CONCURSO', tipo: 'carpeta' },
+    { nombre: 'ultima-carta.jpg', tipo: 'archivo' }
+  ];
+  elementosCargados: ElementoCarga[] = [];
+  arrastrando = false;
+  cargando = false;
+
+  // --- secuencia de procesamiento / cierre ---
+  fase: Fase = 'carga';
+  progreso = 0;
+  confetiPiezas: ConfetiPieza[] = [];
+
   get modoClase(): string {
-    if (!this.hablando || !this.lineaActual) return 'idle';
-    return this.lineaActual.final ? 'modo-verde' : 'modo-azul';
+    if (this.fase === 'procesando' || this.fase === 'generando' || this.fase === 'pendiente') return 'modo-azul';
+    if (this.fase === 'enviado' || this.fase === 'celebrando') return 'modo-verde';
+    if (this.hablando && this.lineaActual) return this.lineaActual.final ? 'modo-verde' : 'modo-azul';
+    return 'idle';
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  manejarTecla(ev: KeyboardEvent): void {
+    if (ev.key >= '1' && ev.key <= '4') {
+      const idx = Number(ev.key) - 1;
+      if (this.lineas[idx]) this.reproducir(this.lineas[idx]);
+      return;
+    }
+    if (ev.key !== 'Enter') return;
+
+    if (this.fase === 'carga' && this.elementosCargados.length === this.secuenciaCarga.length) {
+      this.iniciarProcesamiento();
+    } else if (this.fase === 'pendiente') {
+      this.fase = 'enviado';
+    } else if (this.fase === 'enviado') {
+      this.iniciarCelebracion();
+    }
+  }
+
+  // --- drag & drop ---
+  onDragOver(ev: DragEvent): void {
+    ev.preventDefault();
+    this.arrastrando = true;
+  }
+
+  onDragLeave(): void {
+    this.arrastrando = false;
+  }
+
+  onDrop(ev: DragEvent): void {
+    ev.preventDefault();
+    this.arrastrando = false;
+    if (this.fase !== 'carga' || this.cargando || this.elementosCargados.length >= this.secuenciaCarga.length) return;
+
+    this.cargando = true;
+    const item = this.secuenciaCarga[this.elementosCargados.length];
+
+    setTimeout(() => {
+      this.elementosCargados.push(item);
+      this.cargando = false;
+      new Audio('assets/audios/troia-5.aac').play().catch((err) => console.error(err));
+    }, 900);
+  }
+
+  // --- barra de progreso -> caja grande "procesando" -> tic + aviso ---
+  iniciarProcesamiento(): void {
+    if (this.fase !== 'carga') return;
+
+    this.fase = 'procesando';
+    this.progreso = 0;
+
+    const paso = () => {
+      this.progreso = Math.min(100, this.progreso + Math.random() * 3 + 0.5);
+      if (this.progreso >= 100) {
+        this.progreso = 100;
+        this.fase = 'generando';
+        setTimeout(() => {
+          this.fase = 'pendiente';
+        }, 6500 + Math.random() * 2000);
+        return;
+      }
+      setTimeout(paso, 160 + Math.random() * 220);
+    };
+    paso();
+  }
+
+  // --- festejo final ---
+  iniciarCelebracion(): void {
+    if (this.fase !== 'enviado') return;
+    this.fase = 'celebrando';
+    this.confetiPiezas = this.generarConfeti();
+    new Audio('assets/audios/troia-6.aac').play().catch((err) => console.error(err));
+  }
+
+  private generarConfeti(): ConfetiPieza[] {
+    const colores = ['#7fc8ff', '#3fcf7f', '#ffd166', '#ff6b6b', '#ffffff'];
+    return Array.from({ length: 40 }, () => ({
+      left: Math.random() * 100,
+      color: colores[Math.floor(Math.random() * colores.length)],
+      delay: Math.random() * 0.6,
+      duracion: 2.4 + Math.random() * 1.4
+    }));
   }
 
   ngAfterViewInit(): void {
@@ -85,7 +182,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     const audio = this.audioRef.nativeElement;
 
-    // si es la MISMA línea que ya está sonando: la frena y vuelve a gris
     if (this.hablando && this.lineaActual?.id === linea.id) {
       audio.pause();
       this.hablando = false;
@@ -94,8 +190,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    // matamos cualquier loop de animación anterior ANTES de arrancar uno nuevo,
-    // si no quedan dos rAF dibujando al mismo tiempo sobre el canvas.
     cancelAnimationFrame(this.rafId);
 
     const arrancar = () => {
@@ -115,7 +209,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     };
 
     if (this.hablando) {
-      // es una línea DISTINTA a la que está sonando: sí pasamos por gris
       this.hablando = false;
       audio.pause();
       this.desvanecerOnda(() => arrancar());
@@ -129,9 +222,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     this.analyser.getByteFrequencyData(this.freqData);
 
-    // solo usamos el rango bajo/medio (donde vive la voz) y lo espejamos
-    // a lo largo de todo el círculo, así reacciona el anillo completo
-    // y no solo una porción.
     const binsUtiles = Math.floor(this.freqData.length * 0.5);
     let nivelGlobal = 0;
 
@@ -156,7 +246,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  /** Dibuja un anillo curvo y suave (ondas), no líneas rectas radiales */
   private dibujarOnda(): void {
     const canvas = this.waveRef.nativeElement;
     const ctx = canvas.getContext('2d');
