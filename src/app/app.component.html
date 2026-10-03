@@ -64,6 +64,12 @@
     </p>
   </div>
 
+  <div class="caja-grande caja-guardado" *ngIf="fase === 'guardado'">
+    <span class="tic tic-chico">✓</span>
+    <p class="titulo-caja">Archivo generado con éxito</p>
+    <p class="texto-caja">Está guardado.</p>
+  </div>
+
   <div class="caja-alerta" *ngIf="fase === 'alerta'">
     <p class="alerta-titulo">ALERTA MARTÍN SON</p>
     <p class="alerta-hora">23:50hs</p>

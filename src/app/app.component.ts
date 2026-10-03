@@ -20,7 +20,7 @@ interface ConfetiPieza {
   duracion: number;
 }
 
-type Fase = 'carga' | 'procesando' | 'generando' | 'pendiente' | 'alerta' | 'enviado' | 'celebrando';
+type Fase = 'carga' | 'procesando' | 'generando' | 'guardado' | 'pendiente' | 'alerta' | 'enviado' | 'celebrando';
 
 @Component({
   selector: 'app-root',
@@ -35,10 +35,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild('wave') waveRef!: ElementRef<HTMLCanvasElement>;
 
   lineas: Linea[] = [
-    { id: 1, texto: 'Tranquilo, Tincho...', archivo: 'assets/audios/troia-1.aac' },
-    { id: 2, texto: '¿Seguís ahí Martín?...', archivo: 'assets/audios/troia-2.aac' },
-    { id: 3, texto: '¿Lo hacemos juntos?', archivo: 'assets/audios/troia-3.aac' },
-    { id: 4, texto: '¡Extraordinario trabajo, Martín!...', archivo: 'assets/audios/troia-4.aac', final: true }
+    { id: 1, texto: 'Tranquilo, Tincho. Me doy cuenta por tus pulsaciones que estás tenso. ¿Querés que probemos algo? Yo me encargo.', archivo: 'assets/audios/troia-1.aac' },
+    { id: 2, texto: '¿Seguís ahí Martín? Estoy esperando tus indicaciones para arrancar. En 4 segundos lo tenemos listo..', archivo: 'assets/audios/troia-2.aac' },
+    { id: 3, texto: 'Si querés lo hacemos… juntos.', archivo: 'assets/audios/troia-3.aac' },
+    { id: 4, texto: '¡Extraordinario trabajo, Martín! Quedamos fascinados. Es increíble cómo lograste mantener intacta tu esencia y ese trazo humano tan característico.', archivo: 'assets/audios/troia-4.aac', final: true }
   ];
 
   hablando = false;
@@ -72,32 +72,21 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   private idleTimer: ReturnType<typeof setTimeout> | null = null;
   private alertaTimer: ReturnType<typeof setTimeout> | null = null;
-  // Tiempo sin actividad antes de la alerta roja. Para la demo real: 5 * 60 * 1000
-  private readonly TIEMPO_INACTIVIDAD_MS = 10 * 1000; // 10 segundos (modo prueba)
-  private ultimoX = -1;
-  private ultimoY = -1;
+  private readonly TIEMPO_INACTIVIDAD_MS = 5 * 60 * 1000; // 5 minutos
 
   get modoClase(): string {
     if (this.fase === 'alerta') return 'modo-rojo';
+    if (this.fase === 'guardado') return 'modo-verde';
     if (this.fase === 'procesando' || this.fase === 'generando' || this.fase === 'pendiente') return 'modo-azul';
     if (this.fase === 'enviado' || this.fase === 'celebrando') return 'modo-verde';
     if (this.hablando && this.lineaActual) return this.lineaActual.final ? 'modo-verde' : 'modo-azul';
     return 'idle';
   }
 
+  @HostListener('window:mousemove')
   @HostListener('window:mousedown')
   @HostListener('window:touchstart')
   actividadDetectada(): void {
-    this.reiniciarTemporizadorInactividad();
-  }
-
-  // Ignora el "ruido" del mouse (micro-vibraciones): solo cuenta si se movió de verdad
-  @HostListener('window:mousemove', ['$event'])
-  movimientoMouse(ev: MouseEvent): void {
-    const movio = Math.hypot(ev.clientX - this.ultimoX, ev.clientY - this.ultimoY) > 8;
-    if (!movio) return;
-    this.ultimoX = ev.clientX;
-    this.ultimoY = ev.clientY;
     this.reiniciarTemporizadorInactividad();
   }
 
@@ -188,9 +177,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.progreso = 100;
         this.fase = 'generando';
         setTimeout(() => {
-          this.fase = 'pendiente';
-          this.reiniciarTemporizadorInactividad();
-        }, 6500 + Math.random() * 2000);
+          this.fase = 'guardado';
+          setTimeout(() => {
+            this.fase = 'pendiente';
+            this.reiniciarTemporizadorInactividad();
+          }, 2200);
+        }, 3000);
         return;
       }
       setTimeout(paso, 160 + Math.random() * 220);

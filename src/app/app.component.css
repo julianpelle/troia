@@ -60,17 +60,6 @@
   animation: pulso-tinte 2.4s ease-in-out infinite;
 }
 
-.tinte.modo-rojo {
-  background-color: #e01e1e;
-  opacity: 0.85;
-  animation: pulso-tinte-rojo 0.9s ease-in-out infinite;
-}
-
-@keyframes pulso-tinte-rojo {
-  0%, 100% { opacity: 0.6; }
-  50%      { opacity: 0.95; }
-}
-
 @keyframes pulso-tinte {
   0%, 100% { opacity: 0.4; }
   50%      { opacity: 0.7; }
@@ -327,6 +316,15 @@ h1 {
   height: 34px;
   border-width: 3px;
   border-top-color: #7fc8ff;
+}
+
+.caja-guardado {
+  background: rgba(8, 20, 14, 0.85);
+}
+
+.tic-chico {
+  font-size: 3rem;
+  animation: pop 0.5s cubic-bezier(.34, 1.56, .64, 1);
 }
 
 /* alerta roja por inactividad */
