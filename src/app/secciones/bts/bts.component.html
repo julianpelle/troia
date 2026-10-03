@@ -1,0 +1,16 @@
+<section id="bts" class="seccion reveal">
+  <p class="eyebrow">04 — DETRÁS DE ESCENA</p>
+  <h2 class="titulo-seccion">Making of</h2>
+
+  <div class="video-cont">
+    <!-- poné el video en src/assets/bts/bts.mp4 (o cambiá esta etiqueta por un iframe de Vimeo, como en "El corto") -->
+    <video controls preload="metadata" playsinline src="assets/bts/bts.mp4"></video>
+  </div>
+
+  <div class="notas">
+    <div class="nota" *ngFor="let n of notas">
+      <h3>{{ n.titulo }}</h3>
+      <p>{{ n.texto }}</p>
+    </div>
+  </div>
+</section>

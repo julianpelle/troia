@@ -1,0 +1,24 @@
+.lista-creditos {
+  list-style: none;
+  max-width: 560px;
+}
+
+.lista-creditos li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--linea);
+  font-family: system-ui, sans-serif;
+}
+
+.rol {
+  font-size: 0.8rem;
+  color: var(--tenue);
+}
+
+.nombre {
+  text-align: right;
+  font-size: 0.92rem;
+  color: var(--texto);
+}

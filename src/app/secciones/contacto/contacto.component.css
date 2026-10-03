@@ -1,0 +1,38 @@
+.footer {
+  max-width: 920px;
+  margin: 0 auto;
+  /* abajo queda lugar para que TROIA flotante no tape los links */
+  padding: 3rem 1.5rem 9rem;
+  border-top: 1px solid var(--linea);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem 2rem;
+}
+
+.marca {
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--tenue);
+}
+
+.enlaces {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+}
+
+.enlaces a {
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: var(--texto);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linea);
+  padding-bottom: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.enlaces a:hover { color: var(--verde); }

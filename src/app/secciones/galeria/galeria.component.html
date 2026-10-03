@@ -1,0 +1,9 @@
+<section id="galeria" class="seccion reveal">
+  <p class="eyebrow">03 — GALERÍA</p>
+  <h2 class="titulo-seccion">Imágenes</h2>
+
+  <div class="grilla">
+    <img *ngFor="let src of stills" [src]="src" [alt]="src" class="foto"
+         onerror="this.outerHTML='<div class=&quot;placeholder-img&quot;>still</div>'" />
+  </div>
+</section>

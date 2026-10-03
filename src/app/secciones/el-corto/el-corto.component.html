@@ -1,0 +1,36 @@
+<section id="el-corto" class="seccion reveal">
+  <p class="eyebrow">02 — EL CORTO</p>
+  <h2 class="titulo-seccion">Mirá el cortometraje</h2>
+
+  <div class="video-cont">
+    <iframe
+      src="https://player.vimeo.com/video/XXXXXXXXX"
+      title="TROIA — cortometraje"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <p class="sinopsis">
+    Martín es diseñador gráfico. Le quedan doce horas para entregar un branding
+    que todavía no empezó. TROIA, la inteligencia artificial de su estudio, insiste
+    en ayudarlo. Cuanto más se resiste, más cerca está de dejarla tomar el control.
+  </p>
+
+  <div class="columnas">
+    <div>
+      <h3>Ficha técnica</h3>
+      <ul class="lista-ficha">
+        <li *ngFor="let item of ficha"><span class="rol">{{ item.rol }}</span>{{ item.nombre }}</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Reparto</h3>
+      <ul class="lista-ficha">
+        <li *ngFor="let item of reparto"><span class="rol">{{ item.rol }}</span>{{ item.nombre }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+

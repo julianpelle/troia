@@ -1,0 +1,9 @@
+<div class="pantalla-intro">
+  <canvas #flujo></canvas>
+  <p class="glitch">CLONANDO IDENTIDAD HUMANA DEL USUARIO CON LOS DATOS DE SU DISPOSITIVO</p>
+  <p class="ip">{{ ipActual }}</p>
+  <div class="barra-cont">
+    <div class="barra"><div class="relleno" [style.width.%]="progreso"></div></div>
+    <p class="porcentaje">{{ progreso | number:'1.0-0' }}%</p>
+  </div>
+</div>

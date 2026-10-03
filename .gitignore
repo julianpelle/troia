@@ -1,5 +1,22 @@
+# dependencias
 node_modules/
+
+# build y caché de Angular
 dist/
 .angular/
+out-tsc/
+
+# logs
+npm-debug.log*
+yarn-error.log
+*.log
+
+# editores y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# variables de entorno (por si después agregás alguna)
 .env
-src/assets/troia.mp4
+.env.*

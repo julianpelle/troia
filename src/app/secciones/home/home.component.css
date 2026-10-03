@@ -1,0 +1,65 @@
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.contenido {
+  position: relative;
+  max-width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.marca {
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: #c3ccd5;
+}
+
+.titulo {
+  font-size: clamp(3rem, 12vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+}
+
+.logline {
+  max-width: 480px;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #eef2f5;
+}
+
+.boton-ver {
+  margin-top: 0.6rem;
+  padding: 0.9rem 2.2rem;
+  background: transparent;
+  border: 1px solid rgba(231, 236, 239, 0.4);
+  color: #e7ecef;
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.boton-ver:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: #3fcf7f;
+}
+
+.ficha {
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: #c3ccd5;
+}

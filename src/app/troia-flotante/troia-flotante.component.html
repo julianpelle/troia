@@ -1,0 +1,6 @@
+<button class="troia" type="button" (click)="troia.alternar()" title="TROIA" aria-label="TROIA: escuchar o silenciar">
+  <canvas #wave class="onda" [class.oculta]="!(troia.hablando$ | async)" width="150" height="150"></canvas>
+  <span class="circulo" [class.hablando]="troia.hablando$ | async">
+    <img src="assets/img.png" alt="TROIA" />
+  </span>
+</button>

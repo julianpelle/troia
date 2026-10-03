@@ -1,0 +1,33 @@
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.degradado {
+  position: absolute;
+  inset: 0;
+  background: var(--degradado);
+}
+
+/* capa de color: se mezcla con el gris y lo vuelve azul mientras TROIA habla */
+.tinte {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: color;
+  background-color: #2f7ec9;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.tinte.azul {
+  opacity: 0.55;
+  animation: pulso-tinte 2.4s ease-in-out infinite;
+}
+
+@keyframes pulso-tinte {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.7; }
+}
