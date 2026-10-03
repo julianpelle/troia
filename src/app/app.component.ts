@@ -111,7 +111,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.saliendoEnviado = false;
         this.iniciarCelebracion();
-      }, 500);
+      }, 200);
     }
   }
 
