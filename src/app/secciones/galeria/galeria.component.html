@@ -1,0 +1,16 @@
+<section id="galeria" class="seccion reveal">
+    <p class="eyebrow">03 — GALERÍA</p>
+  <h2 class="titulo-seccion">Imágenes</h2>
+  <div class="grilla">
+    <ng-container *ngFor="let f of fotos; let i = index; trackBy: porIndice">
+      <img *ngIf="!rotas.has(i)"
+           class="foto"
+           [src]="f.src"
+           [alt]="f.alt"
+           loading="lazy"
+           decoding="async"
+           (error)="rotas.add(i)" />
+      <div *ngIf="rotas.has(i)" class="placeholder-img" role="img" [attr.aria-label]="f.alt">still</div>
+    </ng-container>
+  </div>
+</section>

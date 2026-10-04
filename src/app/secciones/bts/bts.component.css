@@ -1,0 +1,77 @@
+.notas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin-bottom: 4rem;
+}
+
+.nota {
+  padding-top: 1rem;
+  border-top: 1px solid var(--linea);
+}
+
+.nota-num {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--tenue);
+}
+
+.nota h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.nota p {
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--tenue);
+}
+
+.subtitulo {
+  margin: 0 0 1.2rem;
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--tenue);
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.foto,
+.placeholder-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.foto {
+  display: block;
+  object-fit: cover;
+  border: 1px solid var(--linea);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+@media (hover: hover) {
+  .foto:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+}
+
+@media (max-width: 700px) {
+  .notas { grid-template-columns: 1fr; margin-bottom: 3rem; }
+}
+
+@media (max-width: 560px) {
+  .grilla { grid-template-columns: repeat(2, 1fr); }
+}

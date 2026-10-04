@@ -1,0 +1,25 @@
+<section id="creditos" class="seccion reveal">
+  <p class="eyebrow">05 — CRÉDITOS</p>
+  <h2 class="titulo-seccion">Equipo</h2>
+
+  <p class="protagonista">
+    <span class="actor">Jorge Cortese</span>
+    <span class="es">es</span>
+    <span class="personaje">Martín</span>
+  </p>
+
+  <ul class="lista-creditos">
+    <li *ngFor="let c of creditos">
+      <span class="rol">{{ c.rol }}</span>
+      <span class="nombre">
+        {{ c.nombre }}
+        <a *ngIf="c.usuario" [href]="c.enlace" target="_blank" rel="noopener">{{ c.usuario }}</a>
+      </span>
+    </li>
+  </ul>
+
+  <div class="cierre">
+    <p>Filmado en <strong>La Rosadita Films</strong></p>
+    <p>Gracias Adelina Gallotti</p>
+  </div>
+</section>

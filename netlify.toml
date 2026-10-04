@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist/troia-sitio/browser"
+
+# para que /shot funcione al entrar directo o al recargar
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

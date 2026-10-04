@@ -1,0 +1,75 @@
+.protagonista {
+  max-width: 560px;
+  margin: 0 0 2.4rem;
+  font-size: clamp(1.4rem, 4.5vw, 2rem);
+  line-height: 1.3;
+}
+
+.actor {
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.es {
+  margin: 0 0.35em;
+  font-weight: 400;
+  color: var(--tenue);
+}
+
+.personaje {
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.lista-creditos {
+  list-style: none;
+  max-width: 560px;
+}
+
+.lista-creditos li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--linea);
+  font-family: system-ui, sans-serif;
+}
+
+.rol {
+  font-size: 0.8rem;
+  color: var(--tenue);
+}
+
+.nombre {
+  text-align: right;
+  font-size: 0.92rem;
+  color: var(--texto);
+}
+
+.nombre a {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--tenue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nombre a:hover {
+  color: var(--verde);
+}
+
+.cierre {
+  max-width: 560px;
+  margin-top: 2.4rem;
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  line-height: 2;
+  color: var(--tenue);
+}
+.cierre strong {
+  font-weight: 400;
+  color: #f7c6d9; /* rosa pastel */
+  text-shadow: 0 0 14px rgba(247, 198, 217, 0.35);
+}

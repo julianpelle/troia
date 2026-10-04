@@ -1,2 +1,106 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { height: 100%; }
+
+:root {
+  --fondo: #07080a;
+  --fondo-alt: #0d0f12;
+  --texto: #eef2f5;
+  --tenue: #b9c2cb;
+  /* mismo gris degradé del rodaje; arranca un poco más oscuro para que el texto claro se lea */
+  --degradado: linear-gradient(160deg, #707780 0%, #4b5158 32%, #1c1f24 68%, #050607 100%);
+  --linea: rgba(255, 255, 255, 0.1);
+  --acento: #ff3b3b;
+  --verde: #3fcf7f;
+}
+
+html, body {
+  height: 100%;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+body { overflow-x: hidden; }
+
+p, a, button, li { font-family: system-ui, -apple-system, sans-serif; }
+
+.seccion {
+  padding: 6rem 1.5rem 4rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--tenue);
+  margin-bottom: 0.8rem;
+}
+
+h2.titulo-seccion {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 600;
+  margin-bottom: 1.6rem;
+}
+
+.linea-separadora {
+  border: none;
+  border-top: 1px solid var(--linea);
+  margin: 0;
+}
+
+.boton {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border: 1px solid rgba(231, 236, 239, 0.4);
+  background: transparent;
+  color: var(--texto);
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.boton:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: var(--verde);
+}
+
+.placeholder-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(145deg, #16181c, #0a0b0d);
+  border: 1px solid var(--linea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tenue);
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+/* aparición suave de cada sección */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.985);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+}

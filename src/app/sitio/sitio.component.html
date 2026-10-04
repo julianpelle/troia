@@ -1,0 +1,26 @@
+<!-- fondo fijo: gris en degradé; la capa azul aparece cuando TROIA habla -->
+<div class="fondo" aria-hidden="true">
+  <div class="degradado"></div>
+  <div class="tinte" [class.azul]="troia.hablando$ | async"></div>
+</div>
+
+<app-intro *ngIf="!listo" (completado)="alTerminarIntro()"></app-intro>
+
+<ng-container *ngIf="listo">
+  <main>
+<app-home></app-home>
+<div class="transicion" aria-hidden="true"></div>
+<app-el-corto></app-el-corto>
+    <hr class="linea-separadora" />
+    <app-galeria></app-galeria>
+    <hr class="linea-separadora" />
+    <app-bts></app-bts>
+    <hr class="linea-separadora" />
+    <app-creditos></app-creditos>
+  </main>
+
+  <app-contacto></app-contacto>
+
+  <!-- la única TROIA -->
+  <app-troia-flotante></app-troia-flotante>
+</ng-container>

@@ -1,0 +1,29 @@
+<section id="bts" class="seccion reveal">
+  <p class="eyebrow">04 — DETRÁS DE ESCENA</p>
+  <h2 class="titulo-seccion">Making of</h2>
+
+  <app-youtube-video videoId="6aMxObWXvq4" titulo="TROIA — detrás de escena"></app-youtube-video>
+
+  <div class="notas">
+    <article class="nota" *ngFor="let n of notas; let i = index">
+      <span class="nota-num">{{ i + 1 | number: '2.0-0' }}</span>
+      <h3>{{ n.titulo }}</h3>
+      <p>{{ n.texto }}</p>
+    </article>
+  </div>
+
+  <h3 class="subtitulo">Imágenes del rodaje</h3>
+
+  <div class="grilla">
+    <ng-container *ngFor="let f of fotos; let i = index; trackBy: porIndice">
+      <img *ngIf="!rotas.has(i)"
+           class="foto"
+           [src]="f.src"
+           [alt]="f.alt"
+           loading="lazy"
+           decoding="async"
+           (error)="rotas.add(i)" />
+      <div *ngIf="rotas.has(i)" class="placeholder-img" role="img" [attr.aria-label]="f.alt">bts</div>
+    </ng-container>
+  </div>
+</section>
