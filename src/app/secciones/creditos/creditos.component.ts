@@ -28,6 +28,10 @@ export class CreditosComponent {
       nombre: 'Giselle E. Cisneros',
       usuario: '@gcisneros.ph',
       enlace: 'https://instagram.com/gcisneros.ph'
+    },
+    {
+      rol: 'Agradecimientos especiales',
+      nombre: 'Adelina Gallotti'
     }
   ];
 }

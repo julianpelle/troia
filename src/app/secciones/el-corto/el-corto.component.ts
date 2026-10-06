@@ -24,7 +24,6 @@ export class ElCortoComponent {
   ];
 
   reparto: FichaItem[] = [
-    { rol: 'Martín', nombre: 'Nombre Apellido' },
-    { rol: 'Voz de TROIA', nombre: 'Nombre Apellido' }
+    { rol: 'Martín', nombre: 'Jorge Cortese' },
   ];
 }
