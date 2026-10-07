@@ -2,6 +2,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SECCIONES_TROIA } from './secciones-troia';
 
+const CLAVE_SILENCIO = 'troia-silenciada';
+
+function leerSilencio(): boolean {
+  try { return sessionStorage.getItem(CLAVE_SILENCIO) === '1'; } catch { return false; }
+}
+
+function guardarSilencio(valor: boolean): void {
+  try { sessionStorage.setItem(CLAVE_SILENCIO, valor ? '1' : '0'); } catch { /* sin storage: queda solo en memoria */ }
+}
+
 /**
  * Motor único de TROIA: un solo audio, una sola onda, un solo estado "hablando".
  * La página le avisa en qué sección está y él decide si habla.
@@ -10,6 +20,10 @@ import { SECCIONES_TROIA } from './secciones-troia';
 export class TroiaService {
   private readonly _hablando = new BehaviorSubject<boolean>(false);
   readonly hablando$ = this._hablando.asObservable();
+
+  /** true cuando el usuario la silenció con un click: no habla sola hasta que la vuelva a tocar */
+  private readonly _silenciada = new BehaviorSubject<boolean>(leerSilencio());
+  readonly silenciada$ = this._silenciada.asObservable();
 
   private readonly audio = new Audio();
   private audioCtx: AudioContext | null = null;
@@ -50,7 +64,7 @@ export class TroiaService {
     this.cancelarEspera();
     this.detener();
 
-    if (!this.audioDe(id)) return;
+    if (this._silenciada.value || !this.audioDe(id)) return;
     this.espera = setTimeout(() => this.arrancar(id), this.RETARDO_MS);
   }
 
@@ -67,16 +81,36 @@ export class TroiaService {
     this.videosSonando.delete(id);
   }
 
-  /** Click sobre TROIA: si habla, se calla; si no, repite la sección actual. */
+  /**
+   * Click sobre TROIA:
+   *  - si habla → se silencia y queda silenciada (también al cambiar de sección) hasta el próximo click;
+   *  - si está silenciada → se activa y retoma la explicación de la sección actual;
+   *  - si está activa pero callada → repite la sección actual.
+   */
   alternar(): void {
+    if (this._silenciada.value) {
+      this.fijarSilencio(false);
+      this.hablarSeccionActual();
+      return;
+    }
     if (this._hablando.value) {
+      this.fijarSilencio(true);
+      this.cancelarEspera();
       this.detener();
       return;
     }
-    if (this.seccionActual) {
-      this.cancelarEspera();
-      this.reproducir(this.seccionActual, true); // click explícito: habla aunque haya un video
-    }
+    this.hablarSeccionActual();
+  }
+
+  private hablarSeccionActual(): void {
+    if (!this.seccionActual) return;
+    this.cancelarEspera();
+    this.reproducir(this.seccionActual, true); // click explícito: habla aunque haya un video
+  }
+
+  private fijarSilencio(valor: boolean): void {
+    this._silenciada.next(valor);
+    guardarSilencio(valor);
   }
 
   /** Espectro actual para dibujar la onda (null si todavía no hay audio). */
@@ -119,6 +153,7 @@ export class TroiaService {
     const src = this.audioDe(id);
     if (!src) return;
     if (!forzado && this.videosSonando.size > 0) return; // hay un video sonando
+    if (!forzado && this._silenciada.value) return; // la silenció el usuario
 
     this.iniciarGrafo();
     if (this.audioCtx?.state === 'suspended') void this.audioCtx.resume();
